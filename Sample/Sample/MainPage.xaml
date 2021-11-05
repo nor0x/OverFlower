@@ -32,6 +32,7 @@
                     Text="dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
                     FontSize="15" />
             </StackLayout>
+            <!--
             <StackLayout Margin="0,32,0,0"
                 HorizontalOptions="Center"
                 WidthRequest="290">
@@ -113,6 +114,7 @@
                     Text="dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
                     FontSize="15" />
             </StackLayout>
+            -->
         </StackLayout>
     </ScrollView>
 </ContentPage>
