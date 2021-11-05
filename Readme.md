@@ -2,7 +2,11 @@
 <img src="https://raw.githubusercontent.com/nor0x/OverFlower/main/imgs/icon.png" width="100px" />
 
 # OverFlower
+[![.NET](https://github.com/nor0x/OverFlower/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nor0x/OverFlower/actions/workflows/dotnet.yml)
+[![](https://img.shields.io/nuget/dt/OverFlower)](https://www.nuget.org/packages/OverFlower)
+
 a simple control to display scrolling overflow content!
+
 <img src="https://raw.githubusercontent.com/nor0x/OverFlower/main/imgs/appstore.gif" />
 
 
