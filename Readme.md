@@ -1,5 +1,5 @@
 
-<img src="https://raw.githubusercontent.com/nor0x/OverFlower/main/imgs/icon.png" width="100px" />
+<img src="https://raw.githubusercontent.com/nor0x/OverFlower/main/imgs/icon.png" width="200px" />
 
 # OverFlower
 [![.NET](https://github.com/nor0x/OverFlower/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nor0x/OverFlower/actions/workflows/dotnet.yml)
