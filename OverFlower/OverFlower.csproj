@@ -8,14 +8,14 @@
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <AssemblyVersion>0.0.1</AssemblyVersion>
     <AssemblyFileVersion>0.0.1</AssemblyFileVersion>
-    <Version>0.0.1</Version>
+    <Version>0.0.1-pre</Version>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
     <LangVersion>latest</LangVersion>
     <PackageReleaseNotes>https://github.com/nor0x/OverFlower/releases</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/nor0x/OverFlower</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/nor0x/OverFlower/master/images/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/nor0x/OverFlower/main/imgs/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/nor0x/OverFlower</RepositoryUrl>
     <PackageTags>overflower, xamarin, xamarin.forms, control, scroll, overflow,</PackageTags>
     <Title>OverFlower for Xamarin.Forms</Title>
