@@ -8,7 +8,7 @@
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <AssemblyVersion>0.0.1</AssemblyVersion>
     <AssemblyFileVersion>0.0.1</AssemblyFileVersion>
-    <Version>0.0.1-pre</Version>
+    <Version>0.0.1</Version>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
