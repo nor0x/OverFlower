@@ -3,6 +3,7 @@
 
 # OverFlower
 [![.NET](https://github.com/nor0x/OverFlower/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nor0x/OverFlower/actions/workflows/dotnet.yml)
+[![](https://img.shields.io/nuget/v/OverFlower)](https://www.nuget.org/packages/OverFlower)
 [![](https://img.shields.io/nuget/dt/OverFlower)](https://www.nuget.org/packages/OverFlower)
 
 a simple control to display scrolling overflow content!
