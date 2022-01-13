@@ -9,6 +9,7 @@
                 InputTransparent="True"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
+                Orientation="Horizontal"
                 HorizontalScrollBarVisibility="Never"
                 VerticalScrollBarVisibility="Never">
                 <Image x:Name="ScrollingImage"
