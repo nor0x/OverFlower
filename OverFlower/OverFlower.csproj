@@ -6,9 +6,9 @@
     <AssemblyName>OverFlower</AssemblyName>
     <RootNamespace>OverFlower</RootNamespace>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>0.0.1</AssemblyVersion>
-    <AssemblyFileVersion>0.0.1</AssemblyFileVersion>
-    <Version>0.0.1</Version>
+    <AssemblyVersion>0.0.2</AssemblyVersion>
+    <AssemblyFileVersion>0.0.2</AssemblyFileVersion>
+    <Version>0.0.2</Version>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
