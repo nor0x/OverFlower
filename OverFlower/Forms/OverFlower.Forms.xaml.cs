@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace OverFlower
+namespace OverFlower.Forms
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OverFlower : ContentView

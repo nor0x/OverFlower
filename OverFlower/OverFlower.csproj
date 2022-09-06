@@ -1,7 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+  <!-- Platforms -->
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.1;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.17763.0</TargetFrameworks>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'monoandroid10.0'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'net6.0-android'">29.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <UseInterpreter Condition="'$(UseInterpreter)' == '' and '$(Configuration)' == 'Debug'">True</UseInterpreter>
+  </PropertyGroup>
+  <!-- Package Stuff -->
+  <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <AssemblyName>OverFlower</AssemblyName>
     <RootNamespace>OverFlower</RootNamespace>
@@ -26,14 +37,48 @@
     <Authors>Joachim Leonfellner</Authors>
     <Copyright>Copyright 2019-2021 nor0x</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\imgs\icon.png" Pack="true" PackagePath="\"/>
-    <None Remove="Xamarin.Forms" />
+    <None
+      Include="..\imgs\icon.png"
+      Pack="true"
+      PackagePath="\" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+  <!-- Xamarin.Forms -->
+  <PropertyGroup Condition="!$(TargetFramework.StartsWith('net6.0'))">
+    <DefineConstants>$(DefineConstants);FORMS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('net6.0'))">
+    <PackageReference
+      Include="Xamarin.Forms"
+      Version="5.0.0.2515" />
+    <EmbeddedResource Remove="MAUI\*.xaml" />
+    <None
+      Include="**\*.Maui.xaml"
+      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <Compile Remove="**\*.Maui.xaml.cs" />
+    <Compile Remove="**\*.Maui.xaml" />
+    <None
+      Include="**\*.Maui.xaml.cs"
+      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+
+  <!-- MAUI -->
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0'))">
+    <DefineConstants>$(DefineConstants);MAUI</DefineConstants>
+    <UseMaui>true</UseMaui>
+  </PropertyGroup>
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net6.0'))">
+    <!-- exclude forms folder -->
+    <MauiXaml Remove="**\*.Forms.xaml" />
+    <None
+      Include="**\*.Forms.xaml"
+      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <Compile Remove="**\*.Forms.xaml.cs" />
+    <Compile Remove="**\*.Forms.xaml" />
+    <None
+      Include="**\*.Forms.xaml"
+      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
 </Project>
