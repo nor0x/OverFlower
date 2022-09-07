@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:overflower="clr-namespace:OverFlower.Maui;assembly=OverFlower"
+             xmlns:local="clr-namespace:SampleMaui"
              x:Class="SampleMaui.MainPage">
 
-    <ScrollView>
+    <ScrollView Background="Tomato">
         <VerticalStackLayout
             Spacing="25"
+            Background="Blue"
             Padding="30,0"
             VerticalOptions="Center">
 
-            <overflower:OverFlower BackgroundColor="Tomato" />
-
+            <local:MyFlower WidthRequest="200" HeightRequest="400" ImageSource="pattern.jpg" ScrollDirection="Up" ScrollDuration="4000" BackgroundColor="LightYellow" Reverse="false" />
+            <Slider WidthRequest="300" />
+            <Entry WidthRequest="500" Background="pink" />
         </VerticalStackLayout>
     </ScrollView>
 
