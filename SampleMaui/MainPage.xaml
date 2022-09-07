@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:SampleMaui"
-             x:Class="SampleMaui.MainPage">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:overflower="clr-namespace:OverFlower;assembly=OverFlower"
+    x:Class="SampleMaui.MainPage">
 
     <ScrollView Background="Tomato">
         <VerticalStackLayout
@@ -11,9 +12,34 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-            <local:MyFlower WidthRequest="200" HeightRequest="400" ImageSource="pattern.jpg" ScrollDirection="Up" ScrollDuration="4000" BackgroundColor="LightYellow" Reverse="false" />
-            <Slider WidthRequest="300" />
-            <Entry WidthRequest="500" Background="pink" />
+            <overflower:OverFlower
+                x:Name="MyFlower"
+                WidthRequest="400"
+                ImageWidth="700"
+                ImageHeight="700"
+                HeightRequest="400"
+                ImageSource="https://images.unsplash.com/photo-1520222984843-df35ebc0f24d"
+                ScrollDirection="Left"
+                ScrollDuration="4000"
+                Mirror="True"
+                BackgroundColor="LightYellow"
+                Reverse="false" />
+            <Button Text="change overflower" WidthRequest="300" Clicked="Button_Clicked" />
+            <HorizontalStackLayout Background="LightGray" HorizontalOptions="Center">
+                <Label Text="X"/>
+                <Entry x:Name="xValue" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Background="LightGray" HorizontalOptions="Center">
+                <Label Text="Y"/>
+                <Entry x:Name="yValue" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Background="LightGray" HorizontalOptions="Center">
+                <Label Text="Z"/>
+                <Entry x:Name="zValue" />
+            </HorizontalStackLayout>
+            <Image x:Name="myimg" Source="first.jpg" WidthRequest="300" HeightRequest="300"  Aspect="AspectFit" />
+            
+            
         </VerticalStackLayout>
     </ScrollView>
 
