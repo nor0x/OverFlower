@@ -49,6 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Remove="Resources\Images\monsters.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiImage Remove="Resources\Images\.jpg" />
 	</ItemGroup>
 
@@ -58,7 +62,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Page Remove="Resources\Styles\Colors.xaml" />
+	  <Page Remove="Resources\Styles\Styles.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Include="Resources\Images\monsters.png" />
+	  <AndroidResource Include="Resources\Styles\Colors.xaml" />
+	  <AndroidResource Include="Resources\Styles\Styles.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\OverFlower\OverFlower.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="DemoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

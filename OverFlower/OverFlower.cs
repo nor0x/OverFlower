@@ -95,6 +95,7 @@ public class OverFlower : Frame
 
     public OverFlower()
     {
+        InputTransparent = true;
 #if MAUI
         Background = Colors.BlueViolet;
 #endif
@@ -108,7 +109,7 @@ public class OverFlower : Frame
 #if FORMS
             Background = Color.Maroon,
 #endif
-            //Clip = new RectangleGeometry(new Rect(0, 0, 400, 500)),
+            Clip = new RectangleGeometry(new Rect(0, 0, 400, 500)),
             Children =
             {
                 new Image
@@ -118,10 +119,12 @@ public class OverFlower : Frame
                     WidthRequest = 987,
                     HeightRequest = 1480,
                     Aspect = Aspect.AspectFit,
-                    Background = Colors.Magenta,
 #endif
                 },
-
+                //IMPORTANT
+                //DO NOT!!!! SET BACKGROUND COLOR
+                // IT NESTS THE IMAGE IN A WRAPPERVIEW
+                // AND BREAKS CLIPPING
 
                 new Image
                 {
@@ -130,7 +133,6 @@ public class OverFlower : Frame
                     HeightRequest = 1480,
 #if MAUI
                     Aspect = Aspect.AspectFit,
-                    Background = Colors.CornflowerBlue,
 #endif
                 }
             }
@@ -159,7 +161,7 @@ public class OverFlower : Frame
         Margin = 0;
 #endif
     }
-    
+
     public void Animat()
     {
         Debug.WriteLine(_first.GetInfo());
@@ -203,7 +205,7 @@ public class OverFlower : Frame
 #endif
 
         InitialOffset();
-        
+
         StartAnimation();
     }
 

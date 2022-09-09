@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:over="clr-namespace:OverFlower;assembly=OverFlower"
+    x:Class="SampleMaui.DemoPage"
+    Shell.NavBarIsVisible="False"
+    Title="DemoPage">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label
+                Text="Welcome to OverFlower ♾️"
+                VerticalOptions="Center"
+                FontSize="32"
+                HorizontalOptions="Center" />
+            <over:OverFlower
+                WidthRequest="500"
+                HeightRequest="500"
+                ImageSource="pattern.jpg"
+                ImageWidth="700"
+                ImageHeight="700"
+                ScrollDirection="Up" />
+            <HorizontalStackLayout Spacing="22" HorizontalOptions="Center" Margin="0,22,0,12" Padding="20" Background="#eeeeee">
+                <VerticalStackLayout>
+                    <Label Text="Width" />
+                    <Entry x:Name="WidthEntry" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Height" />
+                    <Entry x:Name="HeightEntry" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Image Width" />
+                    <Entry x:Name="ImageWidthEntry" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Image Height" />
+                    <Entry x:Name="ImageHeightEntry" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Duration" />
+                    <Entry x:Name="DurationEntry" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Direction" />
+                    <Picker x:Name="DirectionPicker">
+                        <Picker.Items>
+                            <x:String>LEFT</x:String>
+                            <x:String>UP</x:String>
+                            <x:String>RIGHT</x:String>
+                            <x:String>DOWN</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Reverse" />
+                    <Switch x:Name="ReverseSwitch" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="12">
+                <Image Source="monsters.png" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" />
+                <Image Source="pattern.jpg" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" />
+            </HorizontalStackLayout>
+            <VerticalStackLayout WidthRequest="300">
+                <Label Text="Image Url" HorizontalOptions="Center" />
+                <Entry x:Name="ImageEntry" />
+            </VerticalStackLayout>
+            <Button x:Name="ApplyButton" Text="Apply" Clicked="ApplyButton_Clicked" WidthRequest="400" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

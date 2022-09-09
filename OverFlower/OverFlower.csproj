@@ -40,27 +40,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None
-      Include="..\imgs\icon.png"
-      Pack="true"
-      PackagePath="\" />
+    <None Include="..\imgs\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <!-- Xamarin.Forms -->
   <PropertyGroup Condition="!$(TargetFramework.StartsWith('net6.0'))">
     <DefineConstants>$(DefineConstants);FORMS</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="!$(TargetFramework.StartsWith('net6.0'))">
-    <PackageReference
-      Include="Xamarin.Forms"
-      Version="5.0.0.2515" />
-    <None
-      Include="**\*.Maui.xaml"
-      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <None Include="**\*.Maui.xaml" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <Compile Remove="**\*.Maui.xaml.cs" />
     <Compile Remove="**\*.Maui.xaml" />
-    <None
-      Include="**\*.Maui.xaml.cs"
-      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <None Include="**\*.Maui.xaml.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
 
   <!-- MAUI -->
@@ -74,20 +65,14 @@
 
   </PropertyGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference
-      Include="Microsoft.WindowsAppSDK"
-      Version="1.0.0" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.4" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.StartsWith('net6.0'))">
     <!-- exclude forms folder -->
     <MauiXaml Remove="**\*.Forms.xaml" />
-    <None
-      Include="**\*.Forms.xaml"
-      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <None Include="**\*.Forms.xaml" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <Compile Remove="**\*.Forms.xaml.cs" />
     <Compile Remove="**\*.Forms.xaml" />
-    <None
-      Include="**\*.Forms.xaml"
-      Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <None Include="**\*.Forms.xaml" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
 </Project>
