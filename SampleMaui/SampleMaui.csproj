@@ -50,16 +50,11 @@
 
 	<ItemGroup>
 	  <MauiImage Remove="Resources\Images\.jpg" />
-	  <MauiImage Remove="Resources\Images\first.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\.jpg" />
 	  <None Remove="Resources\Images\monsters.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AndroidResource Include="Resources\Images\first.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>

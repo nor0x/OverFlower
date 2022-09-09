@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Border
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SampleMaui.MauiFlower"
+    StrokeThickness="0"
+    x:Name="myborder"
+    Background="pink"
+    WidthRequest="400"
+    HeightRequest="500">
+    <Border.Clip>
+        <RectangleGeometry Rect="0,0,400,500" />
+    </Border.Clip>
+    <Grid x:Name="_container" Background="Orange">
+		<Image
+	x:Name="_first"
+	Source="first.jpg"
+	TranslationY="1480"
+	WidthRequest="987"
+	HeightRequest="1480"
+	Aspect="AspectFit" />
+		<Image
+	x:Name="_second"
+	Source="second.jpg"
+	WidthRequest="987"
+	HeightRequest="1480"
+	Aspect="AspectFit" />
+
+
+        <Rectangle Background="#aaf00fcc" />
+    </Grid>
+</Border>
