@@ -14,13 +14,14 @@
                 FontSize="32"
                 HorizontalOptions="Center" />
             <over:OverFlower
-                WidthRequest="500"
-                HeightRequest="500"
+                WidthRequest="400"
+                HeightRequest="400"
                 ImageSource="pattern.jpg"
                 ImageWidth="700"
                 ImageHeight="700"
+                ScrollDuration="4000"
                 ScrollDirection="Up" />
-            <HorizontalStackLayout Spacing="22" HorizontalOptions="Center" Margin="0,22,0,12" Padding="20" Background="#eeeeee">
+            <HorizontalStackLayout Spacing="22" HorizontalOptions="Center" Margin="0,22,0,12" Padding="20" Background="#ccffa500">
                 <VerticalStackLayout>
                     <Label Text="Width" />
                     <Entry x:Name="WidthEntry" />
@@ -57,15 +58,40 @@
                     <Switch x:Name="ReverseSwitch" />
                 </VerticalStackLayout>
             </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="12">
-                <Image Source="monsters.png" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" />
-                <Image Source="pattern.jpg" Aspect="AspectFill" WidthRequest="100" HeightRequest="100" />
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                <VerticalStackLayout>
+                <Image Source="monsters.png" Aspect="AspectFit" WidthRequest="100" HeightRequest="100" />
+                    <Label Text="1024x1024" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Image Source="pattern.jpg" Aspect="AspectFit" WidthRequest="100" HeightRequest="100" />
+                    <Label Text="400x801" HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Image Source="choco.png" Aspect="AspectFit" WidthRequest="100" HeightRequest="100" />
+                    <Label Text="1024x256" HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Image Source="flatiron.jpg" Aspect="AspectFit" WidthRequest="100" HeightRequest="100" />
+                    <Label Text="3376x6000" HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Image Source="icons.png" Aspect="AspectFit" WidthRequest="100" HeightRequest="100" />
+                    <Label Text="115x885" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Image Source="pano.jpg" Aspect="AspectFit" WidthRequest="100" HeightRequest="100" />
+                    <Label Text="12758x3257" HorizontalOptions="Center" />
+                </VerticalStackLayout>
             </HorizontalStackLayout>
-            <VerticalStackLayout WidthRequest="300">
+            <VerticalStackLayout WidthRequest="300" Margin="0,20,0,0">
                 <Label Text="Image Url" HorizontalOptions="Center" />
                 <Entry x:Name="ImageEntry" />
             </VerticalStackLayout>
-            <Button x:Name="ApplyButton" Text="Apply" Clicked="ApplyButton_Clicked" WidthRequest="400" />
+            <Button x:Name="ApplyButton" Text="Apply" Clicked="ApplyButton_Clicked" WidthRequest="400" Margin="12" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

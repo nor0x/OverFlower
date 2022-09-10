@@ -55,9 +55,7 @@ namespace SampleMaui
             }, 0, 1, Easing.Linear);
 
             ani2.Commit(this, "hellohworld", 14, 4000, Easing.Linear);
-
-
-            MyFlower.Animat();
+        
             mauiflower.Start();
 
         }

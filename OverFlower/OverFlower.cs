@@ -37,87 +37,83 @@ public class OverFlower : Frame
 
 {
 
-    public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(ImageSource), typeof(OverFlower));
-
-    public static readonly BindableProperty ImageWidthProperty = BindableProperty.Create(nameof(ImageWidth), typeof(double), typeof(OverFlower), default(double));
-
-    public static readonly BindableProperty ImageHeightProperty = BindableProperty.Create(nameof(ImageHeight), typeof(double), typeof(OverFlower), default(double));
-
-    public static readonly BindableProperty ScrollDurationProperty = BindableProperty.Create(nameof(ScrollDuration), typeof(double), typeof(OverFlower), default(double));
-
-    public static readonly BindableProperty ReverseProperty = BindableProperty.Create(nameof(Reverse), typeof(bool), typeof(OverFlower), default(bool));
-
+    public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(ImageSource), typeof(OverFlower), propertyChanged: OnImageSourceChanged);
+public static readonly BindableProperty ImageWidthProperty = BindableProperty.Create(nameof(ImageWidth), typeof(double), typeof(OverFlower), default(double), propertyChanged: OnImageWidthChanged);
+    public static readonly BindableProperty ImageHeightProperty = BindableProperty.Create(nameof(ImageHeight), typeof(double), typeof(OverFlower), default(double), propertyChanged: OnImageHeightChanged);
+    public static readonly BindableProperty ScrollDurationProperty = BindableProperty.Create(nameof(ScrollDuration), typeof(double), typeof(OverFlower), default(double), propertyChanged: OnScrollDurationChanged);
+    public static readonly BindableProperty ReverseProperty = BindableProperty.Create(nameof(Reverse), typeof(bool), typeof(OverFlower), default(bool), propertyChanged: OnReverseChanged);
     public static readonly BindableProperty ScrollDirectionProperty = BindableProperty.Create(nameof(ScrollDirection), typeof(ScrollDirection), typeof(OverFlower), ScrollDirection.Left, propertyChanged: OnScrollDirectionChanged);
 
 
-    public double ImageWidth
-    {
-        get { return (double)GetValue(ImageWidthProperty); }
-        set { SetValue(ImageWidthProperty, value); }
-    }
+public double ImageWidth
+{
+    get { return (double)GetValue(ImageWidthProperty); }
+    set { SetValue(ImageWidthProperty, value); }
+}
 
-    public double ImageHeight
-    {
-        get { return (double)GetValue(ImageHeightProperty); }
-        set { SetValue(ImageHeightProperty, value); }
-    }
+public double ImageHeight
+{
+    get { return (double)GetValue(ImageHeightProperty); }
+    set { SetValue(ImageHeightProperty, value); }
+}
 
-    public double ScrollDuration
-    {
-        get { return (double)GetValue(ScrollDurationProperty); }
-        set { SetValue(ScrollDurationProperty, value); }
-    }
+public double ScrollDuration
+{
+    get { return (double)GetValue(ScrollDurationProperty); }
+    set { SetValue(ScrollDurationProperty, value); }
+}
 
-    public bool Reverse
-    {
-        get { return (bool)GetValue(ReverseProperty); }
-        set { SetValue(ReverseProperty, value); }
-    }
+public bool Reverse
+{
+    get { return (bool)GetValue(ReverseProperty); }
+    set { SetValue(ReverseProperty, value); }
+}
 
-    public ScrollDirection ScrollDirection
-    {
-        get { return (ScrollDirection)GetValue(ScrollDirectionProperty); }
-        set { SetValue(ScrollDirectionProperty, value); }
-    }
+public ScrollDirection ScrollDirection
+{
+    get { return (ScrollDirection)GetValue(ScrollDirectionProperty); }
+    set { SetValue(ScrollDirectionProperty, value); }
+}
 
-    public ImageSource ImageSource
-    {
-        get { return (ImageSource)GetValue(ImageSourceProperty); }
-        set { SetValue(ImageSourceProperty, value); }
-    }
+public ImageSource ImageSource
+{
+    get { return (ImageSource)GetValue(ImageSourceProperty); }
+    set { SetValue(ImageSourceProperty, value); }
+}
 
-    Image _first;
-    Image _second;
-    Grid _container;
-    Animation _scrollAnimation;
-    double _spaceEliminator = 1;
-    int _initialZ;
+Image _first;
+Image _second;
+Grid _container;
+Animation _scrollAnimation;
+double _spaceEliminator = 1;
+int _initialZ;
 
-    public OverFlower()
-    {
-        InputTransparent = true;
+public OverFlower()
+{
+    InputTransparent = true;
 #if MAUI
         Background = Colors.BlueViolet;
 #endif
-        //TODO:
-        //add code to repeat images if they are smaller than the container
-        Content = new Grid
-        {
+
+            //TODO:
+    //add code to repeat images if they are smaller than the container
+    Content = new Grid
+    {
 #if MAUI
             Background = Colors.Maroon,
 #endif
 #if FORMS
             Background = Color.Maroon,
 #endif
-            Clip = new RectangleGeometry(new Rect(0, 0, 400, 500)),
-            Children =
+        Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest, HeightRequest)),
+        Children =
             {
                 new Image
                 {
-                    Source = "first.jpg",
+                    Source = ImageSource,
 #if MAUI
-                    WidthRequest = 987,
-                    HeightRequest = 1480,
+                    WidthRequest = ImageWidth,
+                    HeightRequest = ImageHeight,
                     Aspect = Aspect.AspectFit,
 #endif
                 },
@@ -128,9 +124,81 @@ public class OverFlower : Frame
 
                 new Image
                 {
-                    Source = "second.jpg",
-                    WidthRequest = 987,
-                    HeightRequest = 1480,
+                    Source = ImageSource,
+                    WidthRequest = ImageWidth,
+                    HeightRequest = ImageHeight,
+#if MAUI
+                    Aspect = Aspect.AspectFit,
+#endif
+                }
+            }
+    };
+#if MAUI
+        _container = (Grid)Content;
+        _first = (Image)_container.Children.First();
+        _second = (Image)_container.Children.Last();
+#endif
+
+
+#if MAUI
+        _initialZ = _first.ZIndex;
+#endif
+
+
+#if MAUI
+        Background = Colors.GreenYellow;
+#endif
+
+
+#if FORMS
+        HasShadow = false;
+        Padding = 0;
+        CornerRadius = 0;
+        Margin = 0;
+#endif
+}
+
+
+void Initialize()
+{
+    if(_first.WidthRequest <= 0 || _first.HeightRequest <= 0 || _second.WidthRequest <= 0 || _second.HeightRequest <= 0 || ScrollDuration <= 0)
+    {
+        return;
+    }
+
+
+        //TODO:
+        //add code to repeat images if they are smaller than the container
+        Content = new Grid
+        {
+#if MAUI
+            Background = Colors.Maroon,
+#endif
+#if FORMS
+            Background = Color.Maroon,
+#endif
+            Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest, HeightRequest)),
+            Children =
+            {
+                new Image
+                {
+                    Source = ImageSource,
+#if MAUI
+                    WidthRequest = ImageWidth,
+                    HeightRequest = ImageHeight,
+                    Aspect = Aspect.AspectFit,
+#endif
+                },
+                //IMPORTANT
+                //DO NOT!!!! SET BACKGROUND COLOR
+                // IT NESTS THE IMAGE IN A WRAPPERVIEW
+                // AND BREAKS CLIPPING
+
+                new Image
+                {
+                    Source = ImageSource,
+                    WidthRequest = ImageWidth,
+                    HeightRequest = ImageHeight,
 #if MAUI
                     Aspect = Aspect.AspectFit,
 #endif
@@ -160,65 +228,22 @@ public class OverFlower : Frame
         CornerRadius = 0;
         Margin = 0;
 #endif
-    }
 
-    public void Animat()
-    {
-        Debug.WriteLine(_first.GetInfo());
-
-        var x = Extensions.GeneratePropertiesDictionary(this);
-        var y = Extensions.GeneratePropertiesDictionary(_container);
-        var z = Extensions.GeneratePropertiesDictionary(_first);
-
-#if WINDOWS10_0_17763_0_OR_GREATER
-
-
-        Debug.WriteLine("OVERFLOWER:");
-        if (Handler is BorderHandler bh && bh.PlatformView is Panel p)
-        {
-            foreach(var c in p.Children)
-            {
-                Debug.WriteLine("c: " + c.GetType());
-                if(c is LayoutPanel pa && pa.Children is UIElementCollection uec)
-                {
-                    foreach(var ue in uec)
-                    {
-                        Debug.WriteLine("uec: " + ue.GetType());
-                    }
-                }
-            }
-            if (_container.Handler is LayoutHandler lh && lh.PlatformView is LayoutPanel g)
-            {
-                g.Clip = null;
-            }
-            if (_first.Handler is ImageHandler ih && ih.PlatformView is Microsoft.UI.Xaml.Controls.Image i)
-            {
-                i.Clip = null;
-            }
-            if (_second.Handler is ImageHandler ih2 && ih2.PlatformView is Microsoft.UI.Xaml.Controls.Image i2)
-            {
-                i2.Clip = null;
-            }
-            p.Clip = null;
-        }
-
-#endif
 
         InitialOffset();
+    StartAnimation();
+}
 
-        StartAnimation();
-    }
+void InitialOffset()
+{
 
-    void InitialOffset()
+    //initial offset
+    _first.TranslationX = 0;
+    _first.TranslationY = 0;
+    switch (ScrollDirection)
     {
-
-        //initial offset
-        _first.TranslationX = 0;
-        _first.TranslationY = 0;
-        switch (ScrollDirection)
-        {
-            case ScrollDirection.Left:
-                _second.TranslationY = 0;
+        case ScrollDirection.Left:
+            _second.TranslationY = 0;
 #if MAUI
                 _second.TranslationX = -_second.WidthRequest;
 #endif
@@ -226,9 +251,9 @@ public class OverFlower : Frame
                 _second.TranslationX = -_second.Width;
 #endif
 
-                break;
-            case ScrollDirection.Up:
-                _second.TranslationX = 0;
+            break;
+        case ScrollDirection.Up:
+            _second.TranslationX = 0;
 #if MAUI
                 _second.TranslationY = -_second.HeightRequest;
 #endif
@@ -236,9 +261,9 @@ public class OverFlower : Frame
                 _second.TranslationY = -_second.Height;
 
 #endif
-                break;
-            case ScrollDirection.Right:
-                _second.TranslationY = 0;
+            break;
+        case ScrollDirection.Right:
+            _second.TranslationY = 0;
 #if MAUI
                 _second.TranslationX = -_second.WidthRequest;
 #endif
@@ -246,9 +271,9 @@ public class OverFlower : Frame
                 _second.TranslationX = -_second.Width;
 
 #endif
-                break;
-            case ScrollDirection.Down:
-                _second.TranslationX = 0;
+            break;
+        case ScrollDirection.Down:
+            _second.TranslationX = 0;
 #if MAUI
                 _second.TranslationY = -_second.HeightRequest;
 #endif
@@ -256,66 +281,64 @@ public class OverFlower : Frame
                 _second.TranslationY = -_second.Height;
 
 #endif
-                break;
-        }
+            break;
     }
+}
 
-    void StartAnimation()
-    {
-        this.AbortAnimation("scrolling");
+void StartAnimation()
+{
+    this.AbortAnimation("scrolling");
 #if MAUI
         Debug.WriteLine("first: z " + _first.ZIndex + " " + _second.ZIndex);
 
 #endif
-        Action<double> callback = null;
-        switch (ScrollDirection)
-        {
-            case ScrollDirection.Left:
+    Action<double> callback = null;
+    switch (ScrollDirection)
+    {
+        case ScrollDirection.Left:
 #if MAUI
                 //_first.ZIndex = _second.ZIndex;
                 //_second.ZIndex = _initialZ;
 #endif
-                callback = new Action<double>((d) =>
-                {
+            callback = new Action<double>((d) =>
+            {
 #if MAUI
                     var width = _first.WidthRequest;
 #endif
 #if FORMS
                     var width = _first.Width;
 #endif
-                    var transX = -width * d;
-                    _first.TranslationX = transX;
-                    _second.TranslationX = transX + width - _spaceEliminator;
+                var transX = -width * d;
+                _first.TranslationX = transX;
+                _second.TranslationX = transX + width - _spaceEliminator;
 
 
-                });
-                break;
-            case ScrollDirection.Up:
+            });
+            break;
+        case ScrollDirection.Up:
 #if MAUI
                 //_first.ZIndex = _second.ZIndex;
                 //_second.ZIndex = _initialZ;
 #endif
-                callback = new Action<double>((d) =>
-                {
+            callback = new Action<double>((d) =>
+            {
 #if MAUI
                     var height = _first.HeightRequest;
 #endif
 #if FORMS
                     var height = _first.Height;
 #endif
-                    Debug.WriteLine("over D: " + d.ToString("0.00"));
-
-                    var transY = -height * d;
-                    _first.TranslationY = transY;
-                    _second.TranslationY = transY + height - _spaceEliminator;
-                });
-                break;
-            case ScrollDirection.Right:
+                var transY = -height * d;
+                _first.TranslationY = transY;
+                _second.TranslationY = transY + height - _spaceEliminator;
+            });
+            break;
+        case ScrollDirection.Right:
 #if MAUI
                 //_first.ZIndex = _second.ZIndex + 1;
 #endif
-                callback = new Action<double>((d) =>
-                {
+            callback = new Action<double>((d) =>
+            {
 #if MAUI
                     var width = _first.WidthRequest;
 #endif
@@ -323,90 +346,154 @@ public class OverFlower : Frame
                     var width = _first.Width;
 #endif
 
-                    var transX = width * d;
-                    _first.TranslationX = transX;
-                    _second.TranslationX = transX - width + _spaceEliminator;
-                });
-                break;
-            case ScrollDirection.Down:
+                var transX = width * d;
+                _first.TranslationX = transX;
+                _second.TranslationX = transX - width + _spaceEliminator;
+            });
+            break;
+        case ScrollDirection.Down:
 #if MAUI
                 //_first.ZIndex = _second.ZIndex + 1;
 #endif
-                callback = new Action<double>((d) =>
-                {
+            callback = new Action<double>((d) =>
+            {
 #if MAUI
                     var height = _first.HeightRequest;
 #endif
 #if FORMS
                     var height = _first.Height;
 #endif
-                    var transY = height * d;
-                    _first.TranslationY = transY;
-                    _second.TranslationY = transY - height + _spaceEliminator;
+                var transY = height * d;
+                _first.TranslationY = transY;
+                _second.TranslationY = transY - height + _spaceEliminator;
 
-                }); break;
-            default:
-                callback = new Action<double>((d) =>
-                {
+            }); break;
+        default:
+            callback = new Action<double>((d) =>
+            {
 #if MAUI
                 //_first.ZIndex = _second.ZIndex;
                 //_second.ZIndex = _initialZ;
 #endif
-                    callback = new Action<double>((d) =>
-                    {
+                callback = new Action<double>((d) =>
+                {
 #if MAUI
                     var width = _first.WidthRequest;
 #endif
 #if FORMS
                         var width = _first.Width;
 #endif
-                        var transX = -width * d;
-                        _first.TranslationX = transX;
-                        _second.TranslationX = transX + width - _spaceEliminator;
-                    });
+                    var transX = -width * d;
+                    _first.TranslationX = transX;
+                    _second.TranslationX = transX + width - _spaceEliminator;
                 });
-                break;
-        }
-        _scrollAnimation = new Animation(callback, 0, 1, Easing.Linear);
+            });
+            break;
+    }
+    _scrollAnimation = new Animation(callback, 0, 1, Easing.Linear);
 
-        _scrollAnimation.Commit(this, "scrolling", 16, (uint)ScrollDuration, Easing.Linear, finished: (d, hasFinished) =>
+    _scrollAnimation.Commit(this, "scrolling", 16, (uint)ScrollDuration, Easing.Linear, finished: (d, hasFinished) =>
+    {
+        if (!hasFinished)
         {
-            if (!hasFinished)
+            if (Reverse)
             {
-                if (Reverse)
+                switch (ScrollDirection)
                 {
-                    switch (ScrollDirection)
-                    {
-                        case ScrollDirection.Left:
-                            ScrollDirection = ScrollDirection.Right;
-                            break;
-                        case ScrollDirection.Up:
-                            ScrollDirection = ScrollDirection.Down;
-                            break;
-                        case ScrollDirection.Right:
-                            ScrollDirection = ScrollDirection.Left;
-                            break;
-                        case ScrollDirection.Down:
-                            ScrollDirection = ScrollDirection.Up;
-                            break;
-                    }
+                    case ScrollDirection.Left:
+                        ScrollDirection = ScrollDirection.Right;
+                        break;
+                    case ScrollDirection.Up:
+                        ScrollDirection = ScrollDirection.Down;
+                        break;
+                    case ScrollDirection.Right:
+                        ScrollDirection = ScrollDirection.Left;
+                        break;
+                    case ScrollDirection.Down:
+                        ScrollDirection = ScrollDirection.Up;
+                        break;
                 }
             }
-        },
-        repeat: () => !Reverse);
+        }
+    },
+    repeat: () => !Reverse);
+}
+
+    public void ChangeScrollDuration(double duration)
+    {
+        ScrollDuration = duration;
+        Initialize();
+    }
+
+    public void UpdateImageWidth(double width)
+    {
+        if (width < WidthRequest) width = WidthRequest;
+        ImageWidth = width;
+        _first.WidthRequest = width;
+        _second.WidthRequest = width;
+        Initialize();
+
+    }
+
+    public void UpdateImageHeight(double height)
+    {
+        if (height < HeightRequest) height = HeightRequest;
+
+        ImageHeight = height;
+        _first.HeightRequest = height;
+        _second.HeightRequest = height;
+        Initialize();
+
+    }
+
+    public void UpdateImageSource(ImageSource source)
+    {
+        _first.Source = source;
+        _second.Source = source;
+        Initialize();
+    }
+
+    public void ChangeScrollDirection(ScrollDirection direction)
+    {
+        ScrollDirection = direction;
+        Initialize();
+    }
+
+    static void OnScrollDirectionChanged(BindableObject bindable, object oldValue, object newValue)
+{
+        var overFlower = (OverFlower)bindable;
+        overFlower.ChangeScrollDirection((ScrollDirection)newValue);
     }
 
 
-    private static void OnScrollDirectionChanged(BindableObject bindable, object oldValue, object newValue)
+    static void OnReverseChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        if (bindable is OverFlower overflower)
-        {
-            if (overflower._first != null)
-            {
-                //overflower.InitialOffset();
-                //overflower.StartAnimation();
-            }
-        }
+        var overFlower = (OverFlower)bindable;
+        overFlower.Reverse = (bool)newValue;
+    }
+
+    static void OnScrollDurationChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var overFlower = (OverFlower)bindable;
+        overFlower.ChangeScrollDuration((double)newValue);
+    }
+
+    static void OnImageHeightChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var overFlower = (OverFlower)bindable;
+        overFlower.UpdateImageHeight((double)newValue);
+    }
+
+    static void OnImageWidthChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var overFlower = (OverFlower)bindable;
+        overFlower.UpdateImageWidth((double)newValue);
+    }
+
+    static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var overFlower = (OverFlower)bindable;
+        overFlower.UpdateImageSource((ImageSource)newValue);
     }
 }
 
