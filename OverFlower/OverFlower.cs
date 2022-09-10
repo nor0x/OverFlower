@@ -99,13 +99,6 @@ public OverFlower()
     //add code to repeat images if they are smaller than the container
     Content = new Grid
     {
-#if MAUI
-            Background = Colors.Maroon,
-#endif
-#if FORMS
-            Background = Color.Maroon,
-#endif
-        Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest, HeightRequest)),
         Children =
             {
                 new Image
@@ -158,6 +151,8 @@ public OverFlower()
 #endif
 }
 
+    bool _initialized;
+
 
 void Initialize()
 {
@@ -166,19 +161,14 @@ void Initialize()
         return;
     }
 
-
-        //TODO:
-        //add code to repeat images if they are smaller than the container
-        Content = new Grid
+        if (!_initialized)
         {
-#if MAUI
-            Background = Colors.Maroon,
-#endif
-#if FORMS
-            Background = Color.Maroon,
-#endif
-            Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest, HeightRequest)),
-            Children =
+            _initialized = true;
+            //TODO:
+            //add code to repeat images if they are smaller than the container
+            Content = new Grid
+            {
+                Children =
             {
                 new Image
                 {
@@ -204,22 +194,18 @@ void Initialize()
 #endif
                 }
             }
-        };
+            };
 #if MAUI
-        _container = (Grid)Content;
-        _first = (Image)_container.Children.First();
-        _second = (Image)_container.Children.Last();
+            _container = (Grid)Content;
+            _first = (Image)_container.Children.First();
+            _second = (Image)_container.Children.Last();
 #endif
 
 
 #if MAUI
-        _initialZ = _first.ZIndex;
+            _initialZ = _first.ZIndex;
 #endif
 
-
-#if MAUI
-        Background = Colors.GreenYellow;
-#endif
 
 
 #if FORMS
@@ -229,6 +215,23 @@ void Initialize()
         Margin = 0;
 #endif
 
+        }
+        else
+        {
+            _first.WidthRequest = ImageWidth;
+            _first.HeightRequest = ImageHeight;
+
+            _second.WidthRequest = ImageWidth;
+            _second.HeightRequest = ImageHeight;
+        }
+        if (Parent is VisualElement ve && ve.Clip is Geometry geo)
+        {
+            Clip = geo;
+        }
+        else
+        {
+            Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest, HeightRequest));
+        }
 
         InitialOffset();
     StartAnimation();
