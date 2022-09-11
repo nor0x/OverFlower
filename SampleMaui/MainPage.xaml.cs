@@ -14,7 +14,7 @@ namespace SampleMaui
             AddMarkupBorder();
             myimg.Loaded += Myimg_Loaded;
             myimg.PropertyChanged += Myimg_PropertyChanged;
-            
+
         }
 
         private void Myimg_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -42,7 +42,7 @@ namespace SampleMaui
                 myimg.TranslationY = transY;
                 myimg2.TranslationY = transY - height;
             }, 0, 1, Easing.Linear);
-            
+
             ani1.Commit(this, "helloworld", 14, 4000, Easing.Linear);
 
             var ani2 = new Animation((d) =>
@@ -55,7 +55,7 @@ namespace SampleMaui
             }, 0, 1, Easing.Linear);
 
             ani2.Commit(this, "hellohworld", 14, 4000, Easing.Linear);
-        
+
             mauiflower.Start();
 
         }
@@ -99,7 +99,7 @@ namespace SampleMaui
                     }
                 }
             };
-            if(border.Content is Grid g && g.Children.First() is Image fi && g.Children.Last() is Image la)
+            if (border.Content is Grid g && g.Children.First() is Image fi && g.Children.Last() is Image la)
             {
                 _markupImg1 = fi;
                 _markupImg2 = la;

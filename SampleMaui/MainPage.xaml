@@ -11,7 +11,9 @@
             Background="Gray"
             Padding="30,0"
             VerticalOptions="Center">
-            <Grid x:Name="outgrid" ColumnDefinitions="*,*,*,*">
+            <Grid
+                x:Name="outgrid"
+                ColumnDefinitions="*,*,*,*">
                 <overflower:OverFlower
                     x:Name="MyFlower"
                     Grid.Column="3"
@@ -24,7 +26,7 @@
                     ScrollDirection="Up"
                     ScrollDuration="4000"
                     Reverse="false" />
-                <local:MauiFlower         
+                <local:MauiFlower
                     x:Name="mauiflower"
                     Grid.Column="2"
                     StrokeThickness="0"
@@ -47,13 +49,12 @@
                             HeightRequest="1480"
                             Aspect="AspectFit" />
                         <Image
-                        x:Name="myimg2"
-                        Source="second.jpg"
-                        TranslationY="1480"
-                        WidthRequest="987"
-                        HeightRequest="1480"
-                        Aspect="AspectFit" />
-
+                            x:Name="myimg2"
+                            Source="second.jpg"
+                            TranslationY="1480"
+                            WidthRequest="987"
+                            HeightRequest="1480"
+                            Aspect="AspectFit" />
 
                         <!--
                     <Rectangle
@@ -68,10 +69,10 @@
 
             </Grid>
             <Button
-                    x:Name="mybtn"
-                    Text="change overflower"
-                    WidthRequest="300"
-                    Clicked="Button_Clicked" />
+                x:Name="mybtn"
+                Text="change overflower"
+                WidthRequest="300"
+                Clicked="Button_Clicked" />
             <Label x:Name="mylabel">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
