@@ -104,8 +104,8 @@ public class OverFlower : Frame
                     HeightRequest = ImageHeight,
                     Aspect = Aspect.AspectFit,
                 },
-                //IMPORTANT
-                //DO NOT!!!! SET BACKGROUND COLOR
+                // IMPORTANT
+                // DO NOT!!!! SET BACKGROUND COLOR
                 // IT NESTS THE IMAGE IN A WRAPPERVIEW
                 // AND BREAKS CLIPPING
 
@@ -115,6 +115,9 @@ public class OverFlower : Frame
                     WidthRequest = ImageWidth,
                     HeightRequest = ImageHeight,
                     Aspect = Aspect.AspectFit,
+                    #if FORMS
+                    BackgroundColor = Color.GreenYellow
+#endif
                 }
             }
         };
@@ -124,6 +127,7 @@ public class OverFlower : Frame
 
 
 #if MAUI
+        SizeChanged += OverFlower_SizeChanged;
         _initialZ = _first.ZIndex;
 #endif
 
@@ -136,12 +140,16 @@ public class OverFlower : Frame
 #endif
     }
 
-    bool _initialized;
+    private void OverFlower_SizeChanged(object sender, EventArgs e)
+    {
+        Initialize();
+    }
 
+    bool _initialized;
 
     void Initialize()
     {
-        if (_first.WidthRequest <= 0 || _first.HeightRequest <= 0 || _second.WidthRequest <= 0 || _second.HeightRequest <= 0 || ScrollDuration <= 0)
+        if (_first.WidthRequest <= 0 || _first.HeightRequest <= 0 || _second.WidthRequest <= 0 || _second.HeightRequest <= 0 || ScrollDuration <= 0 || Width <= 0 || Height <= 0)
         {
             return;
         }
@@ -157,14 +165,16 @@ public class OverFlower : Frame
             {
                 new Image
                 {
-                    Source = ImageSource,                    
+                    Source = ImageSource,
                     WidthRequest = ImageWidth,
                     HeightRequest = ImageHeight,
                     Aspect = Aspect.AspectFit,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
 
                 },
-                //IMPORTANT
-                //DO NOT!!!! SET BACKGROUND COLOR
+                // IMPORTANT
+                // DO NOT!!!! SET BACKGROUND COLOR
                 // IT NESTS THE IMAGE IN A WRAPPERVIEW
                 // AND BREAKS CLIPPING
 
@@ -174,6 +184,8 @@ public class OverFlower : Frame
                     WidthRequest = ImageWidth,
                     HeightRequest = ImageHeight,
                     Aspect = Aspect.AspectFit,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
                 }
             }
             };
@@ -197,16 +209,21 @@ public class OverFlower : Frame
         }
         else
         {
-            _first.WidthRequest = ImageWidth;
-            _first.HeightRequest = ImageHeight;
+            if (_first.WidthRequest != ImageWidth)
+            {
+                _first.WidthRequest = ImageWidth;
+                _first.HeightRequest = ImageHeight;
 
-            _second.WidthRequest = ImageWidth;
-            _second.HeightRequest = ImageHeight;
+                _second.WidthRequest = ImageWidth;
+                _second.HeightRequest = ImageHeight;
+            }
         }
-#if MAUI
-        Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest, HeightRequest));
-#endif
-
+        if (WidthRequest < Width || HeightRequest < Height)
+        {
+            WidthRequest = Width;
+            if (HeightRequest < Height) HeightRequest = Height;
+            Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest <= 0 ? Width : WidthRequest, HeightRequest <= 0 ? Height : HeightRequest));
+        }
 
         InitialOffset();
         StartAnimation();
@@ -214,7 +231,6 @@ public class OverFlower : Frame
 
     void InitialOffset()
     {
-
         //initial offset
         _first.TranslationX = 0;
         _first.TranslationY = 0;
@@ -222,43 +238,24 @@ public class OverFlower : Frame
         {
             case ScrollDirection.Left:
                 _second.TranslationY = 0;
-#if MAUI
                 _second.TranslationX = -_second.WidthRequest;
-#endif
-#if FORMS
-                _second.TranslationX = -_second.WidthRequest;
-#endif
+
 
                 break;
             case ScrollDirection.Up:
                 _second.TranslationX = 0;
-#if MAUI
-                _second.TranslationY = -_second.HeightRequest;
-#endif
-#if FORMS
                 _second.TranslationY = -_second.HeightRequest;
 
-#endif
                 break;
             case ScrollDirection.Right:
                 _second.TranslationY = 0;
-#if MAUI
-                _second.TranslationX = -_second.WidthRequest;
-#endif
-#if FORMS
                 _second.TranslationX = -_second.WidthRequest;
 
-#endif
                 break;
             case ScrollDirection.Down:
                 _second.TranslationX = 0;
-#if MAUI
-                _second.TranslationY = -_second.HeightRequest;
-#endif
-#if FORMS
                 _second.TranslationY = -_second.HeightRequest;
 
-#endif
                 break;
         }
     }
@@ -277,12 +274,8 @@ public class OverFlower : Frame
 #endif
                 callback = new Action<double>((d) =>
                 {
-#if MAUI
                     var width = _first.WidthRequest;
-#endif
-#if FORMS
-                    var width = _first.WidthRequest;
-#endif
+
                     var transX = -width * d;
                     _first.TranslationX = transX;
                     _second.TranslationX = transX + width - _spaceEliminator;
@@ -297,12 +290,8 @@ public class OverFlower : Frame
 #endif
                 callback = new Action<double>((d) =>
                 {
-#if MAUI
                     var height = _first.HeightRequest;
-#endif
-#if FORMS
-                    var height = _first.HeightRequest;
-#endif
+
                     var transY = -height * d;
                     _first.TranslationY = transY;
                     _second.TranslationY = transY + height - _spaceEliminator;
@@ -314,12 +303,7 @@ public class OverFlower : Frame
 #endif
                 callback = new Action<double>((d) =>
                 {
-#if MAUI
                     var width = _first.WidthRequest;
-#endif
-#if FORMS
-                    var width = _first.WidthRequest;
-#endif
 
                     var transX = width * d;
                     _first.TranslationX = transX;
@@ -332,12 +316,8 @@ public class OverFlower : Frame
 #endif
                 callback = new Action<double>((d) =>
                 {
-#if MAUI
                     var height = _first.HeightRequest;
-#endif
-#if FORMS
-                    var height = _first.HeightRequest;
-#endif
+
                     var transY = height * d;
                     _first.TranslationY = transY;
                     _second.TranslationY = transY - height + _spaceEliminator;
@@ -352,12 +332,8 @@ public class OverFlower : Frame
 #endif
                     callback = new Action<double>((d) =>
                     {
-#if MAUI
-                    var width = _first.WidthRequest;
-#endif
-#if FORMS
                         var width = _first.WidthRequest;
-#endif
+
                         var transX = -width * d;
                         _first.TranslationX = transX;
                         _second.TranslationX = transX + width - _spaceEliminator;
@@ -397,7 +373,10 @@ public class OverFlower : Frame
     public void ChangeScrollDuration(double duration)
     {
         ScrollDuration = duration;
-        Initialize();
+        if (!_initialized)
+        {
+            Initialize();
+        }
     }
 
     public void UpdateImageWidth(double width)
