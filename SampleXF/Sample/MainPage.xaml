@@ -21,9 +21,9 @@
                     <over:OverFlower
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="Start"
-                        BackgroundColor="LightGray"
+                        BackgroundColor="Green"
                         ImageSource="https://raw.githubusercontent.com/nor0x/OverFlower/main/Sample/imgs/appicons_wide.png"
-                        ImageWidth="1000"
+                        ImageWidth="1712"
                         ImageHeight="885"
                         ScrollDirection="Left"
                         ScrollDuration="20000" />
