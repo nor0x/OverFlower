@@ -13,9 +13,8 @@ a simple control to display scrolling overflow content!
 
 | Platform      | Support       |
 | :-------------: |:-------------:|
-| Android      | ✔      |
-| iOS        | ✔      |
-| UWP| ⏳      |
+| Xamarin.Forms      | ✔      |
+| .NET MAUI        | ✔      |
 
 ## Getting started
 
@@ -37,7 +36,7 @@ Start by adding a the XAML namespace  `xmlns:over="clr-namespace:OverFlower;asse
 ## API
 
 ### `ImageSource`
-is a regular Xamarin.Forms ImageSource and 
+is a regular .NET MAUI / Xamarin.Forms ImageSource and 
 ### `ImageWidth`
 width of the overflow image
 ### `ImageHeight`
@@ -47,11 +46,11 @@ scrolling direction of the overflow image
 ### `ScrollDuration`
 duration of the scrolling operation (in milliseconds)
 ### `Reverse`
-coming soon™️
-
+toggle if animation should run indefinitely or reverse after reaching the end
 
 ## Demo
-
+SampleMaui includes a playground & demo of the control
+<img src="https://raw.githubusercontent.com/nor0x/OverFlower/main/imgs/demo.png" />
 
 ## Contribution
 feel free to create issues and PRs 👋
