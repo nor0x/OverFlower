@@ -10,24 +10,18 @@
                 Margin="0,32,0,0"
                 HorizontalOptions="Center"
                 WidthRequest="290">
-                <Frame
-                    Padding="0"
-                    CornerRadius="18"
-                    HasShadow="False"
-                    HorizontalOptions="Center"
+                <over:OverFlower
+                    x:Name="o1"
+                    HorizontalOptions="FillAndExpand"
                     VerticalOptions="Start"
+                    BackgroundColor="CornflowerBlue"
                     WidthRequest="300"
-                    HeightRequest="400">
-                    <over:OverFlower
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="Start"
-                        BackgroundColor="Green"
-                        ImageSource="https://raw.githubusercontent.com/nor0x/OverFlower/main/Sample/imgs/appicons_wide.png"
-                        ImageWidth="1712"
-                        ImageHeight="885"
-                        ScrollDirection="Left"
-                        ScrollDuration="20000" />
-                </Frame>
+                    HeightRequest="400"
+                    ImageSource="https://raw.githubusercontent.com/nor0x/OverFlower/main/Sample/imgs/appicons_wide.png"
+                    ImageWidth="1000"
+                    ImageHeight="516"
+                    ScrollDirection="Left"
+                    ScrollDuration="20000" />
                 <Label
                     Margin="0,4,0,0"
                     Text="Lorem ipsum"
@@ -42,24 +36,17 @@
                 Margin="0,32,0,0"
                 HorizontalOptions="Center"
                 WidthRequest="290">
-                <Frame
-                    Padding="0"
-                    CornerRadius="18"
-                    HasShadow="False"
-                    HorizontalOptions="Center"
+                <over:OverFlower
+                    x:Name="o2"
+                    HorizontalOptions="FillAndExpand"
                     VerticalOptions="Start"
-                    WidthRequest="300"
-                    HeightRequest="400">
-                    <over:OverFlower
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="Start"
-                        BackgroundColor="LightGray"
-                        ImageSource="https://images.unsplash.com/photo-1635357031846-fe1e959dc428"
-                        ImageWidth="2000"
-                        ImageHeight="2000"
-                        ScrollDirection="Right"
-                        ScrollDuration="20000" />
-                </Frame>
+                    BackgroundColor="LightGray"
+                    ImageSource="https://images.unsplash.com/photo-1635357031846-fe1e959dc428"
+                    HeightRequest="400"
+                    ImageWidth="800"
+                    ImageHeight="800"
+                    ScrollDirection="Right"
+                    ScrollDuration="20000" />
                 <Label
                     Margin="0,4,0,0"
                     Text="Lorem ipsum"
@@ -74,24 +61,17 @@
                 Margin="0,32,0,0"
                 HorizontalOptions="Center"
                 WidthRequest="240">
-                <Frame
-                    Padding="0"
-                    CornerRadius="18"
-                    HasShadow="False"
-                    HorizontalOptions="Center"
+                <over:OverFlower
+                    x:Name="o3"
+                    HorizontalOptions="Fill"
                     VerticalOptions="Start"
-                    WidthRequest="250"
-                    HeightRequest="400">
-                    <over:OverFlower
-                        HorizontalOptions="Fill"
-                        VerticalOptions="Start"
-                        BackgroundColor="LightSkyBlue"
-                        ImageSource="https://images.unsplash.com/photo-1520222984843-df35ebc0f24d"
-                        ImageWidth="885"
-                        ImageHeight="1000"
-                        ScrollDirection="Down"
-                        ScrollDuration="80000" />
-                </Frame>
+                    BackgroundColor="LightSkyBlue"
+                    ImageSource="https://images.unsplash.com/photo-1520222984843-df35ebc0f24d"
+                    HeightRequest="400"
+                    ImageWidth="885"
+                    ImageHeight="1000"
+                    ScrollDirection="Down"
+                    ScrollDuration="80000" />
                 <Label
                     Margin="0,4,0,0"
                     Text="Lorem ipsum"
@@ -106,24 +86,17 @@
                 Margin="0,32,0,0"
                 HorizontalOptions="Center"
                 WidthRequest="290">
-                <Frame
-                    Padding="0"
-                    CornerRadius="18"
-                    HasShadow="False"
-                    HorizontalOptions="Center"
+                <over:OverFlower
+                    x:Name="o4"
+                    HorizontalOptions="FillAndExpand"
                     VerticalOptions="Start"
-                    WidthRequest="300"
-                    HeightRequest="400">
-                    <over:OverFlower
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="Start"
-                        BackgroundColor="LightGray"
-                        ImageSource="https://raw.githubusercontent.com/nor0x/OverFlower/main/Sample/imgs/appicons.png"
-                        ImageWidth="1000"
-                        ImageHeight="2500"
-                        ScrollDirection="Up"
-                        ScrollDuration="20000" />
-                </Frame>
+                    BackgroundColor="LightGray"
+                    HeightRequest="400"
+                    ImageSource="https://raw.githubusercontent.com/nor0x/OverFlower/main/Sample/imgs/appicons.png"
+                    ImageWidth="700"
+                    ImageHeight="1000"
+                    ScrollDirection="Up"
+                    ScrollDuration="20000" />
                 <Label
                     Margin="0,4,0,0"
                     Text="Lorem ipsum"

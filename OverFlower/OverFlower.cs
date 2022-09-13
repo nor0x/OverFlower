@@ -20,10 +20,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Shapes;
 #endif
 using System;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Linq;
-
 
 namespace OverFlower;
 
@@ -84,8 +81,13 @@ public class OverFlower : Frame
     Image _second;
     Grid _container;
     Animation _scrollAnimation;
+#if FORMS
+    ContentPage _page;
+#endif
+
     double _spaceEliminator = 1;
     int _initialZ;
+    bool _initialized;
 
     public OverFlower()
     {
@@ -115,9 +117,6 @@ public class OverFlower : Frame
                     WidthRequest = ImageWidth,
                     HeightRequest = ImageHeight,
                     Aspect = Aspect.AspectFit,
-                    #if FORMS
-                    BackgroundColor = Color.GreenYellow
-#endif
                 }
             }
         };
@@ -127,25 +126,46 @@ public class OverFlower : Frame
 
 
 #if MAUI
-        SizeChanged += OverFlower_SizeChanged;
         _initialZ = _first.ZIndex;
+        SizeChanged += OverFlower_SizeChanged;
 #endif
-
 
 #if FORMS
         HasShadow = false;
         Padding = 0;
         CornerRadius = 0;
         Margin = 0;
+
+        PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == "Renderer")
+            {
+                if (_page is not ContentPage)
+                {
+                    var parent = Parent;
+                    while (parent?.Parent != null && !(parent is ContentPage))
+                    {
+                        parent = parent.Parent;
+                    }
+
+                    if (parent is ContentPage page)
+                    {
+                        page.SizeChanged += async (s, e) =>
+                        {
+                            Initialize();
+                        };
+                    }
+                }
+            }
+        };
 #endif
+
     }
 
     private void OverFlower_SizeChanged(object sender, EventArgs e)
     {
         Initialize();
     }
-
-    bool _initialized;
 
     void Initialize()
     {
@@ -221,9 +241,11 @@ public class OverFlower : Frame
         if (WidthRequest < Width || HeightRequest < Height)
         {
             WidthRequest = Width;
-            if (HeightRequest < Height) HeightRequest = Height;
-            Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest <= 0 ? Width : WidthRequest, HeightRequest <= 0 ? Height : HeightRequest));
+            HeightRequest = Height;
+
         }
+
+        Clip = new RectangleGeometry(new Rect(0, 0, WidthRequest <= 0 ? Width : WidthRequest, HeightRequest <= 0 ? Height : HeightRequest));
 
         InitialOffset();
         StartAnimation();
@@ -239,8 +261,6 @@ public class OverFlower : Frame
             case ScrollDirection.Left:
                 _second.TranslationY = 0;
                 _second.TranslationX = -_second.WidthRequest;
-
-
                 break;
             case ScrollDirection.Up:
                 _second.TranslationX = 0;
@@ -250,20 +270,16 @@ public class OverFlower : Frame
             case ScrollDirection.Right:
                 _second.TranslationY = 0;
                 _second.TranslationX = -_second.WidthRequest;
-
                 break;
             case ScrollDirection.Down:
                 _second.TranslationX = 0;
                 _second.TranslationY = -_second.HeightRequest;
-
                 break;
         }
     }
 
     void StartAnimation()
     {
-        this.AbortAnimation("scrolling");
-
         Action<double> callback = null;
         switch (ScrollDirection)
         {
@@ -272,7 +288,7 @@ public class OverFlower : Frame
                 //_first.ZIndex = _second.ZIndex;
                 //_second.ZIndex = _initialZ;
 #endif
-                callback = new Action<double>((d) =>
+                callback = new Action<double>(async (d) =>
                 {
                     var width = _first.WidthRequest;
 
@@ -397,7 +413,6 @@ public class OverFlower : Frame
         _first.HeightRequest = height;
         _second.HeightRequest = height;
         Initialize();
-
     }
 
     public void UpdateImageSource(ImageSource source)
@@ -457,29 +472,4 @@ public enum ScrollDirection
     Down,
     Left,
     Right
-}
-
-public static class Extensions
-{
-    public static List<string> GeneratePropertiesDictionary(object myClass)
-    {
-        return myClass.GetType()
-                      .GetProperties()
-                      .Where(p => p.GetIndexParameters().Length == 0)
-                      .Select(p => p.Name + " " + p.GetValue(myClass))
-                      .ToList();
-    }
-
-    public static string GetInfo(this Image img)
-    {
-        return "Width: " + img.Width + System.Environment.NewLine +
-                "Height: " + img.Height + System.Environment.NewLine +
-                "WidthRequest: " + img.WidthRequest + System.Environment.NewLine +
-                "HeightRequest: " + img.HeightRequest + System.Environment.NewLine +
-                "Bounds: " + img.Bounds + System.Environment.NewLine +
-#if MAUI
-                "Frame: " + img.Frame + System.Environment.NewLine +
-#endif
-                "LayoutOptions: " + img.HorizontalOptions.Alignment + img.HorizontalOptions.Expands + img.VerticalOptions.Alignment + img.VerticalOptions.Expands + System.Environment.NewLine;
-    }
 }

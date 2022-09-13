@@ -17,9 +17,9 @@
     <AssemblyName>OverFlower</AssemblyName>
     <RootNamespace>OverFlower</RootNamespace>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>0.0.2</AssemblyVersion>
-    <AssemblyFileVersion>0.0.2</AssemblyFileVersion>
-    <Version>0.0.2</Version>
+    <AssemblyVersion>0.0.3</AssemblyVersion>
+    <AssemblyFileVersion>0.0.3</AssemblyFileVersion>
+    <Version>0.0.3</Version>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
@@ -29,8 +29,8 @@
     <PackageIconUrl>https://raw.githubusercontent.com/nor0x/OverFlower/main/imgs/icon.png</PackageIconUrl>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/nor0x/OverFlower</RepositoryUrl>
-    <PackageTags>overflower, xamarin, xamarin.forms, control, scroll, overflow,</PackageTags>
-    <Title>OverFlower for Xamarin.Forms</Title>
+    <PackageTags>overflower, maui, dotnet maui, xamarin, xamarin.forms, control, scroll, overflow,</PackageTags>
+    <Title>OverFlower for .NET MAUI and Xamarin.Forms</Title>
     <Summary>control to display scrolling overflow content!</Summary>
     <Description>control to display scrolling overflow content!</Description>
     <Owners>Joachim Leonfellner</Owners>

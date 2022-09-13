@@ -55,6 +55,7 @@
 	<ItemGroup>
 	  <MauiImage Remove="Resources\Images\.jpg" />
 	  <MauiImage Remove="Resources\Images\doodad.png" />
+	  <MauiImage Remove="Resources\Images\pano %28Custom%29.jpg" />
 	  <MauiImage Remove="Resources\Images\raphael-andres-Ym7NVRKgmJc-unsplash.jpg" />
 	  <MauiImage Remove="Resources\Images\sam-butler-HXDyJuaTmA0-unsplash.jpg" />
 	</ItemGroup>
@@ -64,16 +65,6 @@
 	  <None Remove="Resources\Images\flatiron.jpg" />
 	  <None Remove="Resources\Images\monsters.png" />
 	  <None Remove="Resources\Images\sam-butler-HXDyJuaTmA0-unsplash.jpg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Page Remove="Resources\Styles\Colors.xaml" />
-	  <Page Remove="Resources\Styles\Styles.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AndroidResource Include="Resources\Styles\Colors.xaml" />
-	  <AndroidResource Include="Resources\Styles\Styles.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>

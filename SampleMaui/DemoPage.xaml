@@ -13,16 +13,19 @@
                 VerticalOptions="Center"
                 FontSize="32"
                 HorizontalOptions="Center" />
+            <Grid WidthRequest="400"
+                  HeightRequest="400">
+                
             <over:OverFlower
                 x:Name="DemoOverFlower"
-                WidthRequest="400"
-                HeightRequest="400"
                 ImageSource="monsters.png"
                 ImageWidth="500"
                 ImageHeight="500"
                 ScrollDuration="4000"
                 ScrollDirection="Left"
-                Reverse="true" />
+                Reverse="false" />
+            </Grid>
+
             <HorizontalStackLayout
                 Spacing="22"
                 HorizontalOptions="Center"
@@ -175,7 +178,7 @@
                         WidthRequest="100"
                         HeightRequest="100" />
                     <Label
-                        Text="12758x3257"
+                        Text="6000x1532"
                         HorizontalOptions="Center" />
                 </VerticalStackLayout>
             </HorizontalStackLayout>
