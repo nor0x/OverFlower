@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:over="clr-namespace:OverFlower;assembly=OverFlower"
+    x:Class="SampleMaui.DemoPage"
+    Shell.NavBarIsVisible="False"
+    Title="DemoPage">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label
+                Text="Welcome to OverFlower ♾️"
+                VerticalOptions="Center"
+                FontSize="32"
+                HorizontalOptions="Center" />
+            <Grid WidthRequest="400"
+                  HeightRequest="400">
+                
+            <over:OverFlower
+                x:Name="DemoOverFlower"
+                ImageSource="monsters.png"
+                ImageWidth="500"
+                ImageHeight="500"
+                ScrollDuration="4000"
+                ScrollDirection="Left"
+                Reverse="false" />
+            </Grid>
+
+            <HorizontalStackLayout
+                Spacing="22"
+                HorizontalOptions="Center"
+                Margin="0,22,0,12"
+                Padding="20"
+                Background="#ccffa500">
+                <VerticalStackLayout>
+                    <Label Text="Width" />
+                    <Entry
+                        x:Name="WidthEntry"
+                        Text="400" />
+                    <Button
+                        Text="💾"
+                        Clicked="WidthSavedClicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Height" />
+                    <Entry
+                        x:Name="HeightEntry"
+                        Text="400" />
+                    <Button
+                        Text="💾"
+                        Clicked="HeightSavedClicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Image Width" />
+                    <Entry
+                        x:Name="ImageWidthEntry"
+                        Text="500" />
+                    <Button
+                        Text="💾"
+                        Clicked="ImageWidthSavedClicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Image Height" />
+                    <Entry
+                        x:Name="ImageHeightEntry"
+                        Text="500" />
+                    <Button
+                        Text="💾"
+                        Clicked="ImageHeightSavedClicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Duration" />
+                    <Entry
+                        x:Name="DurationEntry"
+                        Text="4000" />
+                    <Button
+                        Text="💾"
+                        Clicked="DurationSavedClicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Direction" />
+                    <Picker
+                        x:Name="DirectionPicker"
+                        WidthRequest="100"
+                        SelectedIndex="1"
+                        SelectedIndexChanged="DirectionPicker_SelectedIndexChanged">
+                        <Picker.Items>
+                            <x:String>LEFT</x:String>
+                            <x:String>UP</x:String>
+                            <x:String>RIGHT</x:String>
+                            <x:String>DOWN</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Reverse" />
+                    <Switch
+                        x:Name="ReverseSwitch"
+                        Toggled="ReverseSwitch_Toggled"
+                        IsToggled="True" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                Spacing="12"
+                HorizontalOptions="Center">
+                <VerticalStackLayout>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Image0Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        Source="monsters.png"
+                        Aspect="AspectFit"
+                        WidthRequest="100"
+                        HeightRequest="100" />
+                    <Label
+                        Text="1024x1024"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Image1Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        Source="pattern.jpg"
+                        Aspect="AspectFit"
+                        WidthRequest="100"
+                        HeightRequest="100" />
+                    <Label
+                        Text="400x801"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Image2Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        Source="choco.png"
+                        Aspect="AspectFit"
+                        WidthRequest="100"
+                        HeightRequest="100" />
+                    <Label
+                        Text="1024x256"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Image3Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        Source="flatiron.jpg"
+                        Aspect="AspectFit"
+                        WidthRequest="100"
+                        HeightRequest="100" />
+                    <Label
+                        Text="3376x6000"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Image4Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        Source="icons.png"
+                        Aspect="AspectFit"
+                        WidthRequest="100"
+                        HeightRequest="100" />
+                    <Label
+                        Text="115x885"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Image5Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        Source="pano.jpg"
+                        Aspect="AspectFit"
+                        WidthRequest="100"
+                        HeightRequest="100" />
+                    <Label
+                        Text="6000x1532"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <VerticalStackLayout
+                WidthRequest="300"
+                Margin="0,20,0,0">
+                <Label
+                    Text="Image Url"
+                    HorizontalOptions="Center" />
+                <Entry x:Name="ImageEntry" />
+                <Button
+                    Text="💾"
+                    Clicked="ImageUrlSavedClicked" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
